@@ -1,0 +1,5 @@
+# Odoo Module Logo
+# This would contain the base64-encoded PNG image for the module icon
+# For a real deployment, you would include a proper SVG or PNG icon file
+
+# Example placeholder - replace with actual icon file

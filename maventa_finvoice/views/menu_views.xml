@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu item for Maventa Finvoice -->
+        <menuitem 
+            id="menu_maventa_finvoice_root" 
+            name="Maventa Finvoice" 
+            action="action_finvoice_log"
+            parent="account.menu_finance_invoices"
+            sequence="100"
+        />
+
+        <menuitem 
+            id="menu_finvoice_configuration" 
+            name="Configuration" 
+            parent="menu_maventa_finvoice_root"
+            sequence="10"
+        />
+
+        <menuitem 
+            id="menu_maventa_config" 
+            name="Maventa API Configuration" 
+            action="action_maventa_config"
+            parent="menu_finvoice_configuration"
+            sequence="10"
+        />
+
+        <menuitem 
+            id="menu_finvoice_logs" 
+            name="Finvoice Transmission Logs" 
+            action="action_finvoice_log"
+            parent="menu_maventa_finvoice_root"
+            sequence="20"
+        />
+    </data>
+</odoo>

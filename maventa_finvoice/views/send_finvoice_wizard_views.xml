@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Send Finvoice Wizard Form View -->
+        <record id="view_finvoice_send_wizard_form" model="ir.ui.view">
+            <field name="name">finvoice.send.wizard.form</field>
+            <field name="model">finvoice.send.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="invoice_id" readonly="1"/>
+                            <field name="method"/>
+                        </group>
+                    </group>
+
+                    <group attrs="{'invisible': [('method', '=', 'multiple')]}">
+                        <group string="Single Recipient">
+                            <field name="partner_id" widget="res_partner_many2one"/>
+                            <field name="recipient_id" required="1"/>
+                        </group>
+                    </group>
+
+                    <group attrs="{'invisible': [('method', '!=', 'multiple')]}">
+                        <group string="Multiple Recipients">
+                            <field name="partner_id" widget="res_partner_many2one" string="Primary Recipient"/>
+                            <field name="recipient_id" required="1" string="Primary Recipient ID"/>
+                            <field name="additional_recipients" widget="many2many_tags" nolabel="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="notes"/>
+                    </group>
+
+                    <footer>
+                        <button 
+                            name="action_send_finvoice" 
+                            type="object" 
+                            string="Send Finvoice" 
+                            class="btn-primary"
+                        />
+                        <button 
+                            string="Cancel" 
+                            class="btn-secondary" 
+                            special="cancel"
+                        />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Send Finvoice Wizard Action -->
+        <record id="action_finvoice_send_wizard" model="ir.actions.act_window">
+            <field name="name">Send Finvoice</field>
+            <field name="res_model">finvoice.send.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

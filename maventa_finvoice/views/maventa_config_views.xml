@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Maventa Configuration Tree View -->
+        <record id="view_maventa_config_tree" model="ir.ui.view">
+            <field name="name">maventa.config.tree</field>
+            <field name="model">maventa.config</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company_id" invisible="0"/>
+                    <field name="sender_id"/>
+                    <field name="connection_status"/>
+                    <field name="test_mode"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Maventa Configuration Form View -->
+        <record id="view_maventa_config_form" model="ir.ui.view">
+            <field name="name">maventa.config.form</field>
+            <field name="model">maventa.config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button 
+                            name="test_connection" 
+                            type="object" 
+                            string="Test Connection" 
+                            class="oe_highlight"
+                        />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Company">
+                                <field name="company_id" options="{'no_create': True}"/>
+                            </group>
+                            <group string="Connection Status">
+                                <field name="connection_status"/>
+                                <field name="last_connection_test"/>
+                                <field name="connection_error" readonly="1" nolabel="1"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="API Configuration">
+                                <group>
+                                    <group string="Credentials">
+                                        <field name="api_base_url"/>
+                                        <field name="api_username"/>
+                                        <field name="api_password" password="True"/>
+                                        <field name="api_customer_id"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Invoice Settings">
+                                <group>
+                                    <group string="Sender Information">
+                                        <field name="sender_id" required="1" help="Your organization identifier (Y-tunnus or DUNS)"/>
+                                        <field name="sender_name" help="Leave empty to use company name"/>
+                                    </group>
+                                    <group string="Options">
+                                        <field name="auto_send_invoices"/>
+                                        <field name="test_mode"/>
+                                        <field name="active"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Maventa Configuration Search View -->
+        <record id="view_maventa_config_search" model="ir.ui.view">
+            <field name="name">maventa.config.search</field>
+            <field name="model">maventa.config</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="company_id"/>
+                    <field name="sender_id"/>
+                    <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                    <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"/>
+                    <filter name="connected" string="Connected" domain="[('connection_status', '=', 'connected')]"/>
+                    <filter name="error" string="Connection Error" domain="[('connection_status', '=', 'error')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Maventa Configuration Action -->
+        <record id="action_maventa_config" model="ir.actions.act_window">
+            <field name="name">Maventa Configuration</field>
+            <field name="res_model">maventa.config</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Maventa configuration
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

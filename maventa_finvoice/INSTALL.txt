@@ -1,0 +1,34 @@
+MAVENTA FINVOICE MODULE FOR ODOO 19
+===================================
+
+This module provides complete integration with Maventa's Finvoice invoice transmission service.
+
+INSTALLATION
+============
+pip install requests lxml
+Then install the module normally through Odoo.
+
+QUICK START
+===========
+1. Go to Accounting > Maventa Finvoice > Configuration > Maventa API Configuration
+2. Create new configuration with your Maventa credentials
+3. Test the connection
+4. On any customer invoice, click "Send Finvoice" to transmit
+
+FEATURES
+========
+✓ Finvoice XML generation (format 3.2.2)
+✓ Multi-recipient sending
+✓ Delivery status tracking
+✓ Automatic sending option
+✓ Comprehensive error logging
+✓ Test mode for sandbox
+✓ Full audit trail
+
+VERSION HISTORY
+===============
+1.0.0 - Initial release for Odoo 19 Enterprise
+
+SUPPORT
+=======
+See README.md for detailed documentation.
