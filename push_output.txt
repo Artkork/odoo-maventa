@@ -1,0 +1,2 @@
+To https://github.com/Artkork/odoo-maventa.git
+ + 164f3c4...cee486c main -> main (forced update)
