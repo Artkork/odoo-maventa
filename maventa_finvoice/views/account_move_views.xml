@@ -13,13 +13,13 @@
                         type="object"
                         string="Send Finvoice"
                         class="oe_highlight"
-                        attrs="{'invisible': [('move_type', 'not in', ['out_invoice', 'out_refund'])]}"
+                        invisible="move_type not in ['out_invoice', 'out_refund']"
                     />
                     <button 
                         name="action_check_finvoice_status" 
                         type="object"
                         string="Check Finvoice Status"
-                        attrs="{'invisible': [('finvoice_status', '=', 'not_sent')]}"
+                        invisible="finvoice_status == 'not_sent'"
                     />
                 </xpath>
 
@@ -32,7 +32,7 @@
                         decoration-success="finvoice_status == 'sent'"
                         decoration-danger="finvoice_status == 'failed'"
                     />
-                    <field name="send_finvoice" attrs="{'invisible': [('move_type', 'not in', ['out_invoice', 'out_refund'])]}"/>
+                    <field name="send_finvoice" invisible="move_type not in ['out_invoice', 'out_refund']"/>
                 </xpath>
 
                 <xpath expr="//field[@name='narration']" position="after">
@@ -41,24 +41,24 @@
                         readonly="1" 
                         nolabel="0"
                         widget="text"
-                        attrs="{'invisible': [('finvoice_error', '=', False)]}"
+                        invisible="not finvoice_error"
                     />
                 </xpath>
 
                 <xpath expr="//page[@name='invoice_tab']" position="after">
-                    <page string="Finvoice" name="finvoice_page" attrs="{'invisible': [('move_type', 'not in', ['out_invoice', 'out_refund'])]}">
+                    <page string="Finvoice" name="finvoice_page" invisible="move_type not in ['out_invoice', 'out_refund']">
                         <group>
                             <field name="finvoice_recipients" widget="many2many_tags"/>
                         </group>
                         
                         <group string="Transmission Logs">
                             <field name="finvoice_logs" nolabel="1" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="recipient_name"/>
                                     <field name="status" widget="badge"/>
                                     <field name="sent_date"/>
                                     <field name="delivery_date"/>
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>
