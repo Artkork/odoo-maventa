@@ -64,11 +64,6 @@ class AccountMove(models.Model):
         
         return result
     
-    @api.model
-    def _create_invoice_line(self, line_vals):
-        """Support for API method"""
-        return super()._create_invoice_line(line_vals)
-    
     def action_post(self):
         """Post invoice and optionally send Finvoice"""
         

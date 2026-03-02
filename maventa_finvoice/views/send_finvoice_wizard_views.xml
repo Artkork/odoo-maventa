@@ -14,14 +14,14 @@
                         </group>
                     </group>
 
-                    <group attrs="{'invisible': [('method', '=', 'multiple')]}">
+                    <group invisible="method == 'multiple'">
                         <group string="Single Recipient">
                             <field name="partner_id" widget="res_partner_many2one"/>
                             <field name="recipient_id" required="1"/>
                         </group>
                     </group>
 
-                    <group attrs="{'invisible': [('method', '!=', 'multiple')]}">
+                    <group invisible="method != 'multiple'">
                         <group string="Multiple Recipients">
                             <field name="partner_id" widget="res_partner_many2one" string="Primary Recipient"/>
                             <field name="recipient_id" required="1" string="Primary Recipient ID"/>
