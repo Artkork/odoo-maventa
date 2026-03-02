@@ -48,7 +48,6 @@ class AccountMove(models.Model):
     )
     
     @api.model_create_multi
-    @api.returns("self", lambda value: value.id)
     def create(self, vals_list):
         """Override create to initialize Finvoice status"""
         
