@@ -2,5 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_maventa_config_user,access_maventa_config_user,model_maventa_config,base.group_user,1,0,0,0
 access_maventa_config_manager,access_maventa_config_manager,model_maventa_config,base.group_erp_manager,1,1,1,1
 access_finvoice_log_user,access_finvoice_log_user,model_finvoice_log,base.group_user,1,1,0,0
-access_finvoice_log_manager,access_finvoice_log_manager,model_finvoice_log,base.group_account_manager,1,1,1,1
+access_finvoice_log_manager,access_finvoice_log_manager,model_finvoice_log,account.group_account_manager,1,1,1,1
 access_finvoice_send_wizard_user,access_finvoice_send_wizard_user,model_finvoice_send_wizard,base.group_user,1,1,1,0
