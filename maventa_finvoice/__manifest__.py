@@ -30,7 +30,7 @@
         "views/account_move_views.xml",
         "views/finvoice_log_views.xml",
         "views/menu_views.xml",
-        "wizards/send_finvoice_wizard_views.xml",
+        "views/send_finvoice_wizard_views.xml",
     ],
     "external_dependencies": {
         "python": [
