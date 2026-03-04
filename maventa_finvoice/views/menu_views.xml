@@ -6,7 +6,7 @@
             id="menu_maventa_finvoice_root" 
             name="Maventa Finvoice" 
             action="action_finvoice_log"
-            parent="account.menu_finance_invoices"
+            parent="account.menu_finance_receivables"
             sequence="100"
         />
 

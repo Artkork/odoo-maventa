@@ -11,13 +11,11 @@ class MaventaConfig(models.Model):
     _name = "maventa.config"
     _description = "Maventa Configuration"
     _rec_name = "company_id"
-    _sql_constraints = [
-        (
-            "company_id_unique",
-            "UNIQUE(company_id)",
-            "A Maventa configuration already exists for this company.",
-        )
-    ]
+
+    _company_id_unique = models.Constraint(
+        "UNIQUE(company_id)",
+        "A Maventa configuration already exists for this company.",
+    )
 
     company_id = fields.Many2one(
         "res.company",
