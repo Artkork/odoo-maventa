@@ -1,11 +1,6 @@
 import base64
 import logging
-import requests
-from datetime import datetime
 from lxml import etree
-from io import BytesIO
-
-from odoo import fields
 
 _logger = logging.getLogger(__name__)
 
@@ -17,6 +12,7 @@ class FinvoiceHandler:
     XMLNS = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
     
     def __init__(self, maventa_config):
+        import requests
         self.config = maventa_config
         self.api_session = requests.Session()
         self.api_session.auth = (
