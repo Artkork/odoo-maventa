@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class MaventaConfig(models.Model):
     """Configuration model for Maventa API integration"""
-    
+    token = "eyJ0eXAiOiJKV1QiLCJraWQiOiIyZGZjYTlmMTE4ZWRlNThmYmZiMjM0ZTIxZDQ0MTY1ODVjNzc3NjZjMDY4OTk4MDdkYTgwNTlhMTRmODRlNjgyIiwiYWxnIjoiUlM1MTIifQ.eyJpZGVudGl0eSI6InVzZXIiLCJ1c2VyX2lkIjoiYjMxMDVlZmItMWRhMy00MTNiLWI2YTMtN2JjYTgwMDg2ZjY4IiwiY29tcGFueV9pZCI6IjY3OWQ2N2Q2LTQ1NWQtNGZjYy1iNWJhLTYzZjI1YzNjNDVkNSIsInNjb3BlIjpbImV1aTpvcGVuIiwiY29tcGFueTpyZWFkIiwiY29tcGFueTp3cml0ZSIsImxvb2t1cCIsInJlY2VpdmFibGVzOmFzc2lnbm1lbnRzIiwiZG9jdW1lbnQ6c2VuZCIsImRvY3VtZW50OnJlY2VpdmUiLCJpbnZvaWNlOnJlY2VpdmUiLCJpbnZvaWNlOnNlbmQiLCJhbmFseXNpcyJdLCJ2ZW5kb3JfaWQiOiJiMGJlYjRlZS02NmUxLTQzYWItODdhMy1iYzliY2Y2MzRmNGYiLCJleHAiOjE3NzMxNTUwMzJ9.NTJFggmVBjw6ORd1uLBPA6Dd9PE-ZCIb3lRh5HfBqhrpeCnKhWIeLSPFN413zuQrJ96MkbaMx2ltt3FCC0iGUySmVwNgiSdww8gIK5l1RUftdPDc1-Wltrs6iXTYutPJylZLNWKJkWw-o6N6UxGQLPAyLvkmpplmPL_02qJFONIJsp8AU1LfJ4X8u7sfo3k05L3ys7SHy46wm90mR-3KX6buA9v6U-1bAHsScylfmwNS0KddFqPH0iopyoSqsK1v-utjvFyWbumMzTT4p5pUyoptpyixey3sG-pBStO34jZ1UgXVO0jBtLjW5kuh-RE7BQNdESbbC3xYyDKg3DbXwQ"
     _name = "maventa.config"
     _description = "Maventa Configuration"
     _rec_name = "company_id"
@@ -114,7 +114,7 @@ class MaventaConfig(models.Model):
             url = f"{self.api_base_url}/api/v1/invoices"
             response = requests.post(
                 url,
-                auth=(self.api_username, self.api_password),
+                auth=(token),
                 timeout=10,
             )
             
