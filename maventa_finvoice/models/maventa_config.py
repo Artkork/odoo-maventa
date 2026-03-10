@@ -7,6 +7,31 @@ _logger = logging.getLogger(__name__)
 
 class MaventaConfig(models.Model):
     """Configuration model for Maventa API integration"""
+
+    def get_oauth2_token_and_invoices(self):
+        """Get OAuth2 token and fetch invoices from Maventa API"""
+        import requests
+        BASE_URL = "https://ax-stage.maventa.com"
+        TOKEN_URL = f"{BASE_URL}/oauth2/token"
+        CLIENT_ID = self.client_id
+        CLIENT_SECRET = self.client_secret
+        VENDOR_API_KEY = self.vendor_api_key
+        data = {
+            "client_id": CLIENT_ID,
+            "client_secret": CLIENT_SECRET,
+            "vendor_api_key": VENDOR_API_KEY,
+            "grant_type": "client_credentials",
+        }
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+        resp = requests.post(TOKEN_URL, data=data, headers=headers, timeout=30)
+        resp.raise_for_status()
+        token = resp.json()["access_token"]
+        # Esimerkki suojatusta kutsusta:
+        invoices_url = f"{BASE_URL}/v1/invoices"
+        auth_headers = {"Authorization": f"Bearer {token}"}
+        invoices = requests.get(invoices_url, headers=auth_headers, timeout=30)
+        _logger.info(f"Invoices response: {invoices.status_code} {invoices.text}")
+        return invoices.status_code, invoices.text
     
     _name = "maventa.config"
     _description = "Maventa Configuration"
@@ -145,3 +170,4 @@ class MaventaConfig(models.Model):
             self.last_connection_test = fields.Datetime.now()
             _logger.error(f"Maventa connection test failed: {error_msg}")
             raise ValidationError(f"Connection test failed: {error_msg}")
+
