@@ -144,6 +144,9 @@ class MaventaConfig(models.Model):
                 "grant_type": "client_credentials",
             }
             headers = {"Content-Type": "application/x-www-form-urlencoded"}
+            _logger.info(f"DEBUG: Lähetettävä token_url: {token_url}")
+            _logger.info(f"DEBUG: Lähetettävä data: {data}")
+            _logger.info(f"DEBUG: Lähetettävä headers: {headers}")
             response = requests.post(token_url, data=data, headers=headers, timeout=30)
             if response.status_code == 200:
                 token = response.json().get("access_token")
