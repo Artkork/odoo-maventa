@@ -111,7 +111,7 @@ class MaventaConfig(models.Model):
         try:
             import requests
             
-            url = f"{self.api_base_url}"
+            url = f"{self.api_base_url}/api/v1"
             response = requests.post(
                 url,
                 auth=(self.api_username, self.api_password),
