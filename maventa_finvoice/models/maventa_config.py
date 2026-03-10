@@ -28,7 +28,7 @@ class MaventaConfig(models.Model):
     api_base_url = fields.Char(
         string="Maventa API Base URL",
         required=True,
-        default="https://masend.maventa.com/api/v1",
+        default="https://ax-stage.maventa.com/api/v1/invoices",
         help="Base URL for Maventa API",
     )
     
@@ -111,7 +111,7 @@ class MaventaConfig(models.Model):
         try:
             import requests
             
-            url = f"{self.api_base_url}/api/v1"
+            url = f"{self.api_base_url}/api/v1/invoices"
             response = requests.post(
                 url,
                 auth=(self.api_username, self.api_password),
