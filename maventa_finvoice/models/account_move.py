@@ -7,9 +7,14 @@ _logger = logging.getLogger(__name__)
 
 class AccountMove(models.Model):
     """Extend account.move with Finvoice capabilities"""
-    
+
     _inherit = "account.move"
-    
+
+    verkkolaskuosoite = fields.Char(
+        string="Verkkolaskuosoite",
+        help="Laskun verkkolaskuosoite (esim. OVT-tunnus)",
+    )
+
     finvoice_status = fields.Selection(
         [
             ("not_sent", "Not Sent"),
@@ -23,25 +28,25 @@ class AccountMove(models.Model):
         readonly=True,
         help="Status of Finvoice transmission",
     )
-    
+
     finvoice_logs = fields.One2many(
         "finvoice.log",
         "invoice_id",
         string="Finvoice Logs",
         readonly=True,
     )
-    
+
     finvoice_recipients = fields.Many2many(
         "res.partner",
         string="Finvoice Recipients",
         help="Partners to send this invoice as Finvoice",
     )
-    
+
     send_finvoice = fields.Boolean(
         string="Send as Finvoice",
         default=False,
     )
-    
+
     finvoice_error = fields.Text(
         string="Finvoice Error",
         readonly=True,

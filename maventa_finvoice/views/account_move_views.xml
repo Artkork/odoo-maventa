@@ -24,6 +24,7 @@
                 </xpath>
 
                 <xpath expr="//field[@name='ref']" position="after">
+                    <field name="verkkolaskuosoite"/>
                     <field 
                         name="finvoice_status" 
                         widget="badge" 

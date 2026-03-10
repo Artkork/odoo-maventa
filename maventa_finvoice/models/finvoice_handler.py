@@ -45,6 +45,11 @@ class FinvoiceHandler:
         # Document metadata
         id_elem = etree.SubElement(invoice_root, "ID")
         id_elem.text = invoice.name
+
+        # Verkkolaskuosoite (OVT) mukaan XML:ään, jos annettu
+        if hasattr(invoice, "verkkolaskuosoite") and invoice.verkkolaskuosoite:
+            ovt_elem = etree.SubElement(invoice_root, "ElectronicInvoiceAddress")
+            ovt_elem.text = invoice.verkkolaskuosoite
         
         issue_date = etree.SubElement(invoice_root, "IssueDate")
         issue_date.text = invoice.invoice_date.isoformat()
