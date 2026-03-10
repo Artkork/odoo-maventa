@@ -136,7 +136,7 @@ class MaventaConfig(models.Model):
         try:
             import requests
             # Käytetään oikeaa OAuth2-token endpointia
-            token_url = f"{self.api_base_url}/oauth2/token"
+            token_url = f"{self.api_base_url}/api/v1"
             data = {
                 "client_id": self.client_id,
                 "client_secret": self.client_secret,
