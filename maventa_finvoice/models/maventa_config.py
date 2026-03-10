@@ -32,22 +32,22 @@ class MaventaConfig(models.Model):
         help="Base URL for Maventa API",
     )
     
-    api_username = fields.Char(
-        string="API Username",
+    client_secret = fields.Char(
+        string="Client Secret",
         required=True,
-        help="Maventa API username",
+        help="Yrityksen käyttäjän API-avain (User API key)",
     )
     
-    api_password = fields.Char(
-        string="API Password",
+    vendor_api_key = fields.Char(
+        string="Vendor API Key",
         required=True,
-        help="Maventa API password",
+        help="Sovelluksen API-avain (Software/Vendor API key)",
     )
     
-    api_customer_id = fields.Char(
-        string="Customer ID",
+    client_id = fields.Char(
+        string="Client ID",
         required=True,
-        help="Your organization ID at Maventa",
+        help="Yrityksen tunniste (Company UUID)",
     )
     
     # Invoice Configuration
@@ -96,12 +96,12 @@ class MaventaConfig(models.Model):
     
     active = fields.Boolean(default=True)
     
-    @api.constrains("api_username", "api_password")
+    @api.constrains("client_secret", "vendor_api_key")
     def _check_credentials(self):
         for record in self:
-            if not record.api_username or not record.api_password:
+            if not record.client_secret or not record.vendor_api_key:
                 raise ValidationError(
-                    "API username and password are required for Maventa configuration."
+                    "Client Secret and Vendor API Key are required for Maventa configuration."
                 )
     
     def test_connection(self):
@@ -114,7 +114,7 @@ class MaventaConfig(models.Model):
             url = f"{self.api_base_url}/authentication/login"
             response = requests.post(
                 url,
-                auth=(self.api_username, self.api_password),
+                auth=(self.client_secret, self.vendor_api_key),
                 timeout=10,
             )
             

@@ -20,8 +20,8 @@ class FinvoiceHandler:
         self.config = maventa_config
         self.api_session = requests.Session()
         self.api_session.auth = (
-            maventa_config.api_username,
-            maventa_config.api_password,
+            maventa_config.client_secret,
+            maventa_config.vendor_api_key,
         )
     
     def _get_endpoint(self, path):

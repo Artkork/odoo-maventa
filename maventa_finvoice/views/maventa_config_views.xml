@@ -47,9 +47,9 @@
                                 <group>
                                     <group string="Credentials">
                                         <field name="api_base_url"/>
-                                        <field name="api_username"/>
-                                        <field name="api_password" password="True"/>
-                                        <field name="api_customer_id"/>
+                                        <field name="client_secret"/>
+                                        <field name="vendor_api_key" password="True"/>
+                                        <field name="client_id"/>
                                     </group>
                                 </group>
                             </page>
