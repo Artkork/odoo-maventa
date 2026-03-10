@@ -135,15 +135,18 @@ class MaventaConfig(models.Model):
         
         try:
             import requests
-            
-            url = f"{self.api_base_url}/authentication/login"
-            response = requests.post(
-                url,
-                auth=(self.client_secret, self.vendor_api_key),
-                timeout=10,
-            )
-            
+            # Käytetään oikeaa OAuth2-token endpointia
+            token_url = f"{self.api_base_url}/oauth2/token"
+            data = {
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "vendor_api_key": self.vendor_api_key,
+                "grant_type": "client_credentials",
+            }
+            headers = {"Content-Type": "application/x-www-form-urlencoded"}
+            response = requests.post(token_url, data=data, headers=headers, timeout=30)
             if response.status_code == 200:
+                token = response.json().get("access_token")
                 self.connection_status = "connected"
                 self.connection_error = ""
                 self.last_connection_test = fields.Datetime.now()
@@ -152,17 +155,16 @@ class MaventaConfig(models.Model):
                     "tag": "display_notification",
                     "params": {
                         "title": "Connection Test Successful",
-                        "message": "Successfully connected to Maventa API",
+                        "message": f"Successfully connected to Maventa API. Token: {token}",
                         "type": "success",
                     },
                 }
             else:
-                error_msg = f"API returned status {response.status_code}"
+                error_msg = f"API returned status {response.status_code}: {response.text}"
                 self.connection_status = "error"
                 self.connection_error = error_msg
                 self.last_connection_test = fields.Datetime.now()
                 raise ValidationError(error_msg)
-                
         except Exception as e:
             error_msg = str(e)
             self.connection_status = "error"
